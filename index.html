@@ -1,69 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/memorizeit_1/image/logo1.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101827" />
     <title>MemorizeIT</title>
-    <link rel="icon" type="image/x-icon" href="/memorizeit_1/image/logo1.png">
-    <link rel="stylesheet" href="main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <section class="gamemodes">
-        <section class="gamemode">
-            <button id="gameModeButton" class="gamemode-button">> SELECT MODE <</button>
-        </section>
-    </section>
-    
-    <main class="game">
-
-        <header>
-            <div> <!-- เปลี่ยนแท็กเป็น <div> -->
-                <button class="playstart" onclick="checkUsername()">Join Mode</button>
-            </div>
-            <input type="username" id="username" placeholder="Username">
-            <h4 class="heading2">Are you ready to play game . . .</h4>
-        </header>
-    
-    </main>
-
-    <span class="button-container">
-        <audio id="myAudio">
-          <source src="/memorizeit_1/sound/music_login.mp3" type="audio/mpeg">
-        </audio>
-        <audio id="wrongSound" src="/memorizeit_1/sound/sound_error.mp3"></audio>
-        
-        <!-- <button class="button" onclick="togglePlay()">เปิด/ปิดเพลง</button> -->
-        <!-- <button class="button" onclick="togglePlay()" style="font-size:24px"><i class='fas fa-volume-up'></i></button> -->
-        <button class="button" onclick="togglePlay()" style="font-size:30px; padding: 0;"><i class='fas fa-volume-up'></i></button>
-    </span>
-
-    <span class="categories">
-        <!-- ปุ่ม icon ลูกศร -->
-        <button class="arrow-button" onclick="toggleCategories()">
-            <i class="far fa-address-book"></i>
-        </button>
-        <!-- แสดงหมวดหมู่ -->
-        <div class="category-list hidden">
-            <!-- รายการหมวดหมู่ -->
-            <div class="category">66087810 มุสตอฟา คามาล</div>
-            <div class="category">66099903 ธีรภัทร์ สายอุบล</div>
-            <div class="category">66088346 ฤทธิพร ผึ่งผาย</div>
-            <div class="category">66085327 ณเมธ วงค์มงคล</div>
-            <div class="category">66088226 กันณพิช เบ้าศรี</div>
-            <div class="category">66082106 วศิน คำสวัสดิ์</div>
-        </div>
-    </span>
-
-    <audio id="clickSound">
-        <source src="/memorizeit_1/sound/equip_runite_1.wav" type="audio/mpeg">
-      </audio>
-
-    <script src="main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
