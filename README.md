@@ -319,20 +319,3 @@ memorizeit/
 </div>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:334155,45:1e3a8a,75:0f172a,100:020617&height=100&section=footer" alt="Footer" />
-
-## GitHub Pages asset path note
-
-This project is configured for GitHub Pages under:
-
-```txt
-https://rittiporn12.github.io/memorizeit/
-```
-
-`vite.config.js` uses `base: "/memorizeit/"`, and public image / sound files are loaded through `import.meta.env.BASE_URL` so background images and audio work correctly after deployment.
-
-Project credit is embedded as:
-
-```txt
-Made by Rittiporn12
-https://github.com/Rittiporn12
-```
