@@ -13,5 +13,11 @@
     "react-dom": "18.2.0",
     "react-icons": "5.5.0",
     "vite": "8.1.0"
+  },
+  "author": "Rittiporn12",
+  "homepage": "https://rittiporn12.github.io/memorizeit/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rittiporn12/memorizeit.git"
   }
 }

@@ -10,14 +10,18 @@ import {
 } from 'react-icons/bs';
 import './styles.css';
 
+const APP_BASE = import.meta.env.BASE_URL || '/';
+const assetPath = (path) => `${APP_BASE}${path.replace(/^\/+/, '')}`;
+const PROJECT_OWNER_URL = 'https://github.com/Rittiporn12';
+
 const COLORS = [
-  { id: 'red', label: 'Red', sound: '/memorizeit_1/sound/equip_runite_1.wav' },
-  { id: 'green', label: 'Green', sound: '/memorizeit_1/sound/equip_runite_2.wav' },
-  { id: 'blue', label: 'Blue', sound: '/memorizeit_1/sound/equip_runite_5.wav' },
-  { id: 'yellow', label: 'Yellow', sound: '/memorizeit_1/sound/equip_runite_4.wav' },
-  { id: 'purple', label: 'Purple', sound: '/memorizeit_1/sound/equip_runite_5.wav' },
-  { id: 'brown', label: 'Brown', sound: '/memorizeit_1/sound/equip_runite_2.wav' },
-  { id: 'orange', label: 'Orange', sound: '/memorizeit_1/sound/equip_runite_1.wav' }
+  { id: 'red', label: 'Red', sound: assetPath('memorizeit_1/sound/equip_runite_1.wav') },
+  { id: 'green', label: 'Green', sound: assetPath('memorizeit_1/sound/equip_runite_2.wav') },
+  { id: 'blue', label: 'Blue', sound: assetPath('memorizeit_1/sound/equip_runite_5.wav') },
+  { id: 'yellow', label: 'Yellow', sound: assetPath('memorizeit_1/sound/equip_runite_4.wav') },
+  { id: 'purple', label: 'Purple', sound: assetPath('memorizeit_1/sound/equip_runite_5.wav') },
+  { id: 'brown', label: 'Brown', sound: assetPath('memorizeit_1/sound/equip_runite_2.wav') },
+  { id: 'orange', label: 'Orange', sound: assetPath('memorizeit_1/sound/equip_runite_1.wav') }
 ];
 
 const BASE_TILES = ['red', 'green', 'blue', 'yellow'];
@@ -28,13 +32,13 @@ const modeConfig = {
   memorize: {
     title: 'MEMORIZE',
     subtitle: 'Watch the color sequence and repeat it in the correct order.',
-    music: '/memorizeit_1/sound/music_easy.mp3',
-    loginBackground: '/memorizeit_1/image/background.gif',
+    music: assetPath('memorizeit_1/sound/music_easy.mp3'),
+    loginBackground: assetPath('memorizeit_1/image/background.gif'),
     backgrounds: [
-      '/memorizeit_1/image/background_1.gif',
-      '/memorizeit_1/image/background_2.gif',
-      '/memorizeit_1/image/background_3.gif',
-      '/memorizeit_1/image/background_4.gif'
+      assetPath('memorizeit_1/image/background_1.gif'),
+      assetPath('memorizeit_1/image/background_2.gif'),
+      assetPath('memorizeit_1/image/background_3.gif'),
+      assetPath('memorizeit_1/image/background_4.gif')
     ],
     description: 'Remember the pattern and tap it back.',
     badge: 'Memory mode'
@@ -42,13 +46,13 @@ const modeConfig = {
   observation: {
     title: 'OBSERVATION',
     subtitle: 'Read the color word and tap the matching button.',
-    music: '/memorizeit_1/sound/music_hard.mp3',
-    loginBackground: '/memorizeit_2/image/background.gif',
+    music: assetPath('memorizeit_1/sound/music_hard.mp3'),
+    loginBackground: assetPath('memorizeit_2/image/background.gif'),
     backgrounds: [
-      '/memorizeit_2/image/background_1.gif',
-      '/memorizeit_2/image/background_2.gif',
-      '/memorizeit_2/image/background_3.gif',
-      '/memorizeit_2/image/background_4.gif'
+      assetPath('memorizeit_2/image/background_1.gif'),
+      assetPath('memorizeit_2/image/background_2.gif'),
+      assetPath('memorizeit_2/image/background_3.gif'),
+      assetPath('memorizeit_2/image/background_4.gif')
     ],
     description: 'Stay focused and react to the right color.',
     badge: 'Focus mode'
@@ -75,7 +79,7 @@ function useAudio(notify) {
   const musicRef = useRef(null);
   const soundsRef = useRef(new Map());
   const [isMusicOn, setIsMusicOn] = useState(true);
-  const [musicSrc, setMusicSrc] = useState('/memorizeit_1/sound/music_login.mp3');
+  const [musicSrc, setMusicSrc] = useState(assetPath('memorizeit_1/sound/music_login.mp3'));
 
   const getSound = useCallback((src, volume = 0.3) => {
     if (!soundsRef.current.has(src)) {
@@ -133,7 +137,7 @@ function useAudio(notify) {
 
   const toggleMusic = useCallback(() => {
     const audio = musicRef.current;
-    playSound('/memorizeit_1/sound/selectsound.mp3', 0.25);
+    playSound(assetPath('memorizeit_1/sound/selectsound.mp3'), 0.25);
 
     if (!audio) return;
 
@@ -243,7 +247,7 @@ function AppDialog({ dialog, onClose }) {
 
 function Landing({ selectedMode, setSelectedMode, username, setUsername, onStart, audio }) {
   const chooseMode = (mode) => {
-    audio.playSound('/memorizeit_1/sound/selectsound.mp3', 0.25);
+    audio.playSound(assetPath('memorizeit_1/sound/selectsound.mp3'), 0.25);
     audio.setMusicSrc(modeConfig[mode].music);
     setSelectedMode(mode);
   };
@@ -252,7 +256,7 @@ function Landing({ selectedMode, setSelectedMode, username, setUsername, onStart
     <main className="landing-shell">
       <section className="hero-card">
         <div className="logo-row brand-block">
-          <img className="brand-logo" src="/memorizeit_1/image/logo.png" alt="MemorizeIT logo" />
+          <img className="brand-logo" src={assetPath('memorizeit_1/image/logo.png')} alt="MemorizeIT logo" />
           <p className="hero-subtitle">Memory and focus mini game</p>
         </div>
 
@@ -414,7 +418,7 @@ function GameBoard({ mode, username, onExit, audio, notify, openDialog }) {
   }, [audio]);
 
   const showObservation = useCallback(async (color, currentLevel) => {
-    audio.playSound('/memorizeit_1/sound/sound_font.mp3', 0.45);
+    audio.playSound(assetPath('memorizeit_1/sound/sound_font.mp3'), 0.45);
     const randomTextColor = currentLevel >= 11 ? pickRandom(visibleTiles) : color;
     setDisplayWord(color.toUpperCase());
     setDisplayColor(randomTextColor);
@@ -449,7 +453,7 @@ function GameBoard({ mode, username, onExit, audio, notify, openDialog }) {
     let hiddenForRound = [...hiddenTiles];
 
     if (nextLevelValue === MAX_LEVEL + 1) {
-      audio.playSound('/memorizeit_1/sound/sound_congrade.mp3', 0.5);
+      audio.playSound(assetPath('memorizeit_1/sound/sound_congrade.mp3'), 0.5);
       openDialog({
         title: 'Congratulations!',
         message: 'You cleared all 20 levels. Thanks for playing MemorizeIT.',
@@ -468,7 +472,7 @@ function GameBoard({ mode, username, onExit, audio, notify, openDialog }) {
       tilesForRound = [...tilesForRound, nextColor];
       setVisibleTiles(tilesForRound);
       setHiddenTiles(hiddenForRound);
-      audio.playSound('/memorizeit_1/sound/nextlevel.mp3', 0.5);
+      audio.playSound(assetPath('memorizeit_1/sound/nextlevel.mp3'), 0.5);
       notify(`New color unlocked: ${nextColor.toUpperCase()}`, 'success');
       await wait(450);
     }
@@ -485,7 +489,7 @@ function GameBoard({ mode, username, onExit, audio, notify, openDialog }) {
 
   const startGame = async () => {
     audio.playMusic();
-    audio.playSound('/memorizeit_1/sound/selectsound.mp3', 0.25);
+    audio.playSound(assetPath('memorizeit_1/sound/selectsound.mp3'), 0.25);
     resetState();
     setIsPlaying(true);
     setIsCountingDown(true);
@@ -495,14 +499,14 @@ function GameBoard({ mode, username, onExit, audio, notify, openDialog }) {
     for (const step of [3, 2, 1]) {
       setCountdown(step);
       setStatus(`Starting in ${step}...`);
-      audio.playSound('/memorizeit_1/sound/selectsound.mp3', 0.18);
+      audio.playSound(assetPath('memorizeit_1/sound/selectsound.mp3'), 0.18);
       await wait(1000);
       if (runId !== startRunRef.current) return;
     }
 
     setCountdown('GO!');
     setStatus('Go!');
-    audio.playSound('/memorizeit_1/sound/nextlevel.mp3', 0.4);
+    audio.playSound(assetPath('memorizeit_1/sound/nextlevel.mp3'), 0.4);
     await wait(700);
     if (runId !== startRunRef.current) return;
 
@@ -522,7 +526,7 @@ function GameBoard({ mode, username, onExit, audio, notify, openDialog }) {
   };
 
   const loseGame = useCallback(() => {
-    audio.playSound('/memorizeit_1/sound/sound_error.mp3', 0.55);
+    audio.playSound(assetPath('memorizeit_1/sound/sound_error.mp3'), 0.55);
     openDialog({
       title: 'Round failed',
       message: 'That was not the correct answer. Do you want to try again?',
@@ -633,6 +637,21 @@ function FloatingControls({ audio }) {
   );
 }
 
+function EmbeddedCredit() {
+  return (
+    <a
+      className="embedded-credit"
+      href={PROJECT_OWNER_URL}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="MemorizeIT project credit: Rittiporn12 on GitHub"
+      title="MemorizeIT by Rittiporn12"
+    >
+      Made by Rittiporn12
+    </a>
+  );
+}
+
 function App() {
   const { toasts, dialog, notify, openDialog, closeDialog } = useNotifications();
   const audio = useAudio(notify);
@@ -641,13 +660,13 @@ function App() {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    const bg = selectedMode ? modeConfig[selectedMode].loginBackground : '/memorizeit_1/image/background.gif';
+    const bg = selectedMode ? modeConfig[selectedMode].loginBackground : assetPath('memorizeit_1/image/background.gif');
     document.body.style.setProperty('--page-bg', `url(${bg})`);
   }, [selectedMode]);
 
   const startSelectedMode = () => {
     audio.playMusic();
-    audio.playSound('/memorizeit_1/sound/selectsound.mp3', 0.25);
+    audio.playSound(assetPath('memorizeit_1/sound/selectsound.mp3'), 0.25);
 
     if (!selectedMode) {
       notify('Please choose a mode first.', 'warning');
@@ -700,6 +719,7 @@ function App() {
         />
       )}
 
+      <EmbeddedCredit />
       <FloatingControls audio={audio} />
       <Toasts items={toasts} />
       <AppDialog dialog={dialog} onClose={closeDialog} />
